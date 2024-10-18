@@ -1,0 +1,11 @@
+../DMC/MeasurementHandler/measurement.c:19:10:adc_to_rpm	8	static
+../DMC/MeasurementHandler/measurement.c:36:10:calculate_throttle	8	static
+../DMC/MeasurementHandler/measurement.c:43:7:calculate_voltage	16	static
+../DMC/MeasurementHandler/measurement.c:53:7:calculate_current	16	static
+../DMC/MeasurementHandler/measurement.c:66:7:measure_temperature	8	static
+../DMC/MeasurementHandler/measurement.c:71:6:calculateMotorPeriod	0	static
+../DMC/MeasurementHandler/measurement.c:92:6:resetMotorPeriod	0	static
+../DMC/MeasurementHandler/measurement.c:96:6:filterMotorPeriod	0	static
+../DMC/MeasurementHandler/measurement.c:101:6:calculateMotorSpeed	8	static
+../DMC/MeasurementHandler/measurement.c:117:6:filterMotorSpeed	8	static
+../DMC/MeasurementHandler/measurement.c:124:6:getHallAngle	0	static

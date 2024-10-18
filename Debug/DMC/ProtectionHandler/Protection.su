@@ -1,0 +1,6 @@
+../DMC/ProtectionHandler/Protection.c:14:10:check_hall_protection	0	static
+../DMC/ProtectionHandler/Protection.c:19:10:check_throttle	0	static
+../DMC/ProtectionHandler/Protection.c:25:10:check_overvoltage	8	static
+../DMC/ProtectionHandler/Protection.c:30:10:check_undervoltage	8	static
+../DMC/ProtectionHandler/Protection.c:34:10:check_overCurrent	8	static
+../DMC/ProtectionHandler/Protection.c:39:10:check_overTemperature	8	static

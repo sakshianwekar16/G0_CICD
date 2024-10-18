@@ -1,0 +1,5 @@
+../DMC/commutation/motor.c:24:9:get_PHASEA_PWM_Value	0	static
+../DMC/commutation/motor.c:44:9:get_PHASEB_PWM_Value	0	static
+../DMC/commutation/motor.c:61:9:get_PHASEC_PWM_Value	0	static
+../DMC/commutation/motor.c:77:6:phaseAdv_updateAngle	24	static
+../DMC/commutation/motor.c:86:6:motor_sineCommutation	16	static
