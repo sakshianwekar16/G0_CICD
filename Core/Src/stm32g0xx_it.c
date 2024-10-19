@@ -20,6 +20,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32g0xx_it.h"
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
 #include "taskhandler.h"
 #include "statemachine.h"
 #include "SVM.h"
@@ -37,11 +39,7 @@
 #include"main.h"
 #include"structs.h"
 #include"string.h"
-HOST_VAR_t HostVar;
-COMMUNICATION_VAL_t Communication;
-
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+#include"initialtask.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -61,6 +59,8 @@ COMMUNICATION_VAL_t Communication;
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
+HOST_VAR_t HostVar;
+COMMUNICATION_VAL_t Communication;
 
 /* USER CODE END PV */
 
@@ -78,11 +78,9 @@ COMMUNICATION_VAL_t Communication;
 extern DMA_HandleTypeDef hdma_adc1;
 extern ADC_HandleTypeDef hadc1;
 extern TIM_HandleTypeDef htim1;
-extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim14;
 extern TIM_HandleTypeDef htim17;
 extern UART_HandleTypeDef huart1;
-
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -93,124 +91,6 @@ extern UART_HandleTypeDef huart1;
 /**
   * @brief This function handles Non maskable interrupt.
   */
-
-void motorenable() {
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
-	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_3);
-}
-
-void motordisable() {
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
-	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
-	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_2);
-	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_3);
-}
-
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
-    if (&htim->Instance == &htim3.Instance) {
-    	MotorRun.hall_overflowedFlag = 0;
-        // Read hall value here
-        uint8_t hall = ((HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
-                        | (HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin) << 2)
-                        | HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin));
-        Measured.hallstate = hall ^ MotorRun.hallmodifier;
-        MotorRun.phaseIncAcc =0;
-		if (Measured.motorPeriod.firstCap == 1U){
-			Measured.motorPeriod.firstCap = 0U;
-			Measured.motorPeriod.capturedValue = MAX_HALL_PERIOD;
-		}
-		Measured.motorPeriod.lastInputCapturedTime = HAL_GetTick();
-        Measured.motorPeriod.inputCaptured = 1;
-        Measured.motorPeriod.capturedValue = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
-        handle_hall(hall);
-		calculateMotorPeriod(Measured.motorPeriod.capturedValue);
-		calculateMotorSpeed(Measured.motorPeriod.periodBeforeClamp);
-		getHallAngle(Measured.hallstate);
-    }
-}
-
-void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {
-    if (GPIO_Pin == PAS_Pin) {
-    	pedal_riseIntHandler(HAL_GetTick());
-    }
-    if (GPIO_Pin == MOTOR_SPD_Pin) {
-    	SWS_intHandler(HAL_GetTick());
-    }
-}
-
-void handleHallOverflow(void){
-	Measured.motorSpeed.speedWithoutFilter = 0;
-//		measured.motorSpeed.speed = 0;
-	Measured.motorPeriod.periodBeforeFilter = MAX_HALL_PERIOD;
-	Measured.motorPeriod.period = MAX_HALL_PERIOD;
-//		calculateMotorSpeed(measured.motorPeriod.period);
-//	filterMotorSpeed();
-//	getHallPos();
-	handle_hall(Measured.hallPosition);
-	getHallAngle(Measured.hallstate);
-//	Fixedvalue.phaseIncAcc = 0;
-	Measured.motorPeriod.firstCap = 1U;
-}
-
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
-
-    if (hadc->Instance == ADC1) {
-        // Process ADC values
-    	uint32_t current = HostVar.rawADCValues[0];
-    	uint32_t voltage = HostVar.rawADCValues[1];
-    	uint32_t throttle = HostVar.rawADCValues[2];
-    	uint32_t temperature = HostVar.rawADCValues[3];
-//        process_adc_values();
-    	// Call the function to process ADC values and check protections
-
-    	update_ADC(current,voltage,throttle,temperature);
-
-    }
-}
-
-static uint8_t validAddress[3] = { 0x01, 0x14, 0x01 };
-void acceptDataIfAddressMatch() {
-	if (Communication.rxBuf[0] == validAddress[0]
-			&& Communication.rxBuf[1] == validAddress[1]
-			&& Communication.rxBuf[2] == validAddress[2]) {
-		memcpy(Communication.rawData, Communication.rxBuf, DISPLAY_RX_SIZE);
-		display_parse();
-		Communication.source = 0;
-	}
-}
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	if (huart->Instance == USART1) {
-		acceptDataIfAddressMatch();
-//		acceptFrontendAdress();
-		HAL_UART_Receive_IT(&huart1, Communication.rxBuf, DISPLAY_RX_SIZE);
-		Display.lastReceptionTime = HAL_GetTick();
-	}
-}
-
-void display_handleReception() {
-	if (HAL_GetTick() > Display.lastReceptionTime + DISPLAY_RECONNECT_TIMEOUT) {
-		if (HAL_GetTick() > Display.lastReconnectionAttempt + 100) {
-			HAL_UART_AbortReceive_IT(&huart1);
-			HAL_UART_Receive_IT(&huart1, Communication.rxBuf, DISPLAY_RX_SIZE);
-			Display.lastReconnectionAttempt = HAL_GetTick();
-		}
-	}
-}
-
-void display_parse() {
-	Display.in.parsed.pedalAssist = Communication.rawData[4];
-	Display.in.parsed.multiParam.value = Communication.rawData[5];
-	if (Display.in.parsed.multiParam.cruiseSignal == 1) {
-		cruise_toggle();
-	}
-}
 void NMI_Handler(void)
 {
   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
@@ -362,14 +242,40 @@ void TIM1_CC_IRQHandler(void)
 void TIM3_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM3_IRQn 0 */
+	if (0U == LL_TIM_IsActiveFlag_UPDATE(TIM3)) {
+		/* Nothing to do */
+	} else {
 
-  /* USER CODE END TIM3_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim3);
-  /* USER CODE BEGIN TIM3_IRQn 1 */
-  if (MotorRun.hall_overflowedFlag == 1){
-		MotorRun.times_tim3overflowed++;
+		LL_TIM_ClearFlag_UPDATE(TIM3);
 	  handleHallOverflow();
-  }
+	}
+
+	if (LL_TIM_IsActiveFlag_CC1(TIM3) != 0U) {
+		LL_TIM_ClearFlag_CC1(TIM3);
+		MotorRun.hall_overflowedFlag = 0;
+		        // Read hall value here
+		        uint8_t hall = ((HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
+		                        | (HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin) << 2)
+		                        | HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin));
+		        Measured.hallstate = hall ^ MotorRun.hallmodifier;
+		        MotorRun.phaseIncAcc =0;
+				if (Measured.motorPeriod.firstCap == 1U){
+					Measured.motorPeriod.firstCap = 0U;
+					Measured.motorPeriod.capturedValue = MAX_HALL_PERIOD;
+				}
+				Measured.motorPeriod.lastInputCapturedTime = HAL_GetTick();
+		        Measured.motorPeriod.inputCaptured = 1;
+		        Measured.motorPeriod.capturedValue =(uint16_t) LL_TIM_IC_GetCaptureCH1(TIM3);
+		        handle_hall(hall);
+				calculateMotorPeriod(Measured.motorPeriod.capturedValue);
+				calculateMotorSpeed(Measured.motorPeriod.periodBeforeClamp);
+				getHallAngle(Measured.hallstate);
+	} else {
+		/* Nothing to do */
+	}
+  /* USER CODE END TIM3_IRQn 0 */
+  /* USER CODE BEGIN TIM3_IRQn 1 */
+
 
   /* USER CODE END TIM3_IRQn 1 */
 }
@@ -377,7 +283,7 @@ void TIM3_IRQHandler(void)
 /**
   * @brief This function handles TIM14 global interrupt.
   */
-void TIM14_IRQHandler(void)//fast loop
+void TIM14_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM14_IRQn 0 */
 		TIM1->CCR3 = FixedValue.PDC1Latch;
@@ -386,27 +292,15 @@ void TIM14_IRQHandler(void)//fast loop
 		get_PHASEA_PWM_Value();
 		get_PHASEB_PWM_Value();
 		get_PHASEC_PWM_Value();
-		stateMachine_handle();
-//	slow_loop();
-//	phaseAdv_updateAngle();
-//	filterMotorPeriod();
-//	filterMotorSpeed();
-//	initialconfiguration();
-//	uint32_t brake = HAL_GPIO_ReadPin(BRAKE_GPIO_Port, BRAKE_Pin);
-//	update_brakevalue(brake);
-//	updateSpeedPIValues();
-//	SWS_calculateSpeed();
-//	pedal_handle();
-//	uint32_t sec = HAL_GetTick();
-//	update_time(sec);
-//	cruise_handle();
-//	handleDrivingInputSource();
-//	static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x00,
-//			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13 };
-//	transmit(tx_data);
-//	display_handleTransmission();
-//	HAL_UART_Transmit_IT(&huart1, tx_data, 14);
-//	display_handleReception();
+	initialconfiguration();
+	slow_loop();
+	phaseAdv_updateAngle();
+	filterMotorPeriod();
+	filterMotorSpeed();
+	uint32_t brake = HAL_GPIO_ReadPin(BRAKE_GPIO_Port, BRAKE_Pin);
+	update_brakevalue(brake);
+	handleDrivingInputSource();
+	stateMachine_handle();
   /* USER CODE END TIM14_IRQn 0 */
   HAL_TIM_IRQHandler(&htim14);
   /* USER CODE BEGIN TIM14_IRQn 1 */
@@ -417,36 +311,22 @@ void TIM14_IRQHandler(void)//fast loop
 /**
   * @brief This function handles TIM17 global interrupt.
   */
-void TIM17_IRQHandler(void)//slow loop
+void TIM17_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM17_IRQn 0 */
-//	TIM1->CCR3 = FixedValue.PDC1Latch;
-//	TIM1->CCR2 = FixedValue.PDC2Latch;
-//	TIM1->CCR1 = FixedValue.PDC3Latch;
-//	get_PHASEA_PWM_Value();
-//	get_PHASEB_PWM_Value();
-//	get_PHASEC_PWM_Value();
-//	stateMachine_handle();
-	slow_loop();
-	phaseAdv_updateAngle();
-	filterMotorPeriod();
-	filterMotorSpeed();
-	initialconfiguration();
-	uint32_t brake = HAL_GPIO_ReadPin(BRAKE_GPIO_Port, BRAKE_Pin);
-	update_brakevalue(brake);
-	updateSpeedPIValues();
-	SWS_calculateSpeed();
-	pedal_handle();
-	uint32_t sec = HAL_GetTick();
-	update_time(sec);
-	cruise_handle();
-	handleDrivingInputSource();
-	static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x00,
-			0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13 };
-	transmit(tx_data);
-	display_handleTransmission();
-	HAL_UART_Transmit_IT(&huart1, tx_data, 14);
-	display_handleReception();
+	    updateSpeedPIValues();
+		SWS_calculateSpeed();
+		pedal_handle();
+		uint32_t sec = HAL_GetTick();
+		update_time(sec);
+		cruise_handle();
+		handleDrivingInputSource();
+		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x00,
+				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13 };
+		transmit(tx_data);
+		display_handleTransmission();
+		HAL_UART_Transmit_IT(&huart1, tx_data, 14);
+		display_handleReception();
   /* USER CODE END TIM17_IRQn 0 */
   HAL_TIM_IRQHandler(&htim17);
   /* USER CODE BEGIN TIM17_IRQn 1 */
@@ -469,5 +349,100 @@ void USART1_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+void motorenable() {
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
+	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
+	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_3);
+}
+
+void motordisable() {
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_3);
+	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
+	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_2);
+	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_3);
+}
+
+
+void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {
+    if (GPIO_Pin == PAS_Pin) {
+    	pedal_riseIntHandler(HAL_GetTick());
+    }
+    if (GPIO_Pin == MOTOR_SPD_Pin) {
+    	SWS_intHandler(HAL_GetTick());
+    }
+}
+
+void handleHallOverflow(void){
+	Measured.motorSpeed.speedWithoutFilter = 0;
+//		measured.motorSpeed.speed = 0;
+	Measured.motorPeriod.periodBeforeFilter = MAX_HALL_PERIOD;
+	Measured.motorPeriod.period = MAX_HALL_PERIOD;
+//		calculateMotorSpeed(measured.motorPeriod.period);
+//	filterMotorSpeed();
+//	getHallPos();
+	handle_hall(Measured.hallPosition);
+	getHallAngle(Measured.hallstate);
+//	Fixedvalue.phaseIncAcc = 0;
+	Measured.motorPeriod.firstCap = 1U;
+}
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
+
+    if (hadc->Instance == ADC1) {
+        // Process ADC values
+    	uint32_t current = HostVar.rawADCValues[1];
+    	uint32_t voltage = HostVar.rawADCValues[0];
+    	uint32_t throttle = HostVar.rawADCValues[2];
+    	uint32_t temperature = HostVar.rawADCValues[3];
+//        process_adc_values();
+    	// Call the function to process ADC values and check protections
+
+    	update_ADC(current,voltage,throttle,temperature);
+
+    }
+}
+
+static uint8_t validAddress[3] = { 0x01, 0x14, 0x01 };
+void acceptDataIfAddressMatch() {
+	if (Communication.rxBuf[0] == validAddress[0]
+			&& Communication.rxBuf[1] == validAddress[1]
+			&& Communication.rxBuf[2] == validAddress[2]) {
+		memcpy(Communication.rawData, Communication.rxBuf, DISPLAY_RX_SIZE);
+		display_parse();
+		Communication.source = 0;
+	}
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	if (huart->Instance == USART1) {
+		acceptDataIfAddressMatch();
+//		acceptFrontendAdress();
+		HAL_UART_Receive_IT(&huart1, Communication.rxBuf, DISPLAY_RX_SIZE);
+		Display.lastReceptionTime = HAL_GetTick();
+	}
+}
+
+void display_handleReception() {
+	if (HAL_GetTick() > Display.lastReceptionTime + DISPLAY_RECONNECT_TIMEOUT) {
+		if (HAL_GetTick() > Display.lastReconnectionAttempt + 100) {
+			HAL_UART_AbortReceive_IT(&huart1);
+			HAL_UART_Receive_IT(&huart1, Communication.rxBuf, DISPLAY_RX_SIZE);
+			Display.lastReconnectionAttempt = HAL_GetTick();
+		}
+	}
+}
+
+void display_parse() {
+	Display.in.parsed.pedalAssist = Communication.rawData[4];
+	Display.in.parsed.multiParam.value = Communication.rawData[5];
+	if (Display.in.parsed.multiParam.cruiseSignal == 1) {
+		cruise_toggle();
+	}
+}
 
 /* USER CODE END 1 */

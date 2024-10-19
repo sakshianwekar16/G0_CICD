@@ -10,7 +10,7 @@
 #define INC_STRUCTS_H_
 
 typedef struct {
-   uint16_t rawADCValues[4];
+   uint32_t rawADCValues[4];
 } HOST_VAR_t;
 extern HOST_VAR_t HostVar;
 

@@ -35,6 +35,16 @@ Core/Src/stm32g0xx_it.o: ../Core/Src/stm32g0xx_it.c ../Core/Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_tim.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_bus.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_cortex.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_rcc.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_system.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_utils.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_pwr.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_gpio.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_exti.h \
  ../Core/Inc/stm32g0xx_it.h D:/DMC_G0/DMC/Headerfile/taskhandler.h \
  D:/DMC_G0/DMC/Headerfile/statemachine.h D:/DMC_G0/DMC/Headerfile/SVM.h \
  D:/DMC_G0/DMC/Headerfile/sharedData.h \
@@ -45,7 +55,8 @@ Core/Src/stm32g0xx_it.o: ../Core/Src/stm32g0xx_it.c ../Core/Inc/main.h \
  D:/DMC_G0/DMC/Headerfile/cruisecontrol.h \
  D:/DMC_G0/DMC/Headerfile/brake.h D:/DMC_G0/DMC/Headerfile/define.h \
  D:/DMC_G0/DMC/Headerfile/SWS.h D:/DMC_G0/DMC/Headerfile/measurement.h \
- D:/DMC_G0/DMC/Headerfile/controlLoop.h ../Core/Inc/structs.h
+ D:/DMC_G0/DMC/Headerfile/controlLoop.h ../Core/Inc/structs.h \
+ ../Core/Inc/initialtask.h
 ../Core/Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
 ../Core/Inc/stm32g0xx_hal_conf.h:
@@ -83,6 +94,16 @@ Core/Src/stm32g0xx_it.o: ../Core/Src/stm32g0xx_it.c ../Core/Inc/main.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_tim.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_bus.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_cortex.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_rcc.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_system.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_utils.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_pwr.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_gpio.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_exti.h:
 ../Core/Inc/stm32g0xx_it.h:
 D:/DMC_G0/DMC/Headerfile/taskhandler.h:
 D:/DMC_G0/DMC/Headerfile/statemachine.h:
@@ -100,3 +121,4 @@ D:/DMC_G0/DMC/Headerfile/SWS.h:
 D:/DMC_G0/DMC/Headerfile/measurement.h:
 D:/DMC_G0/DMC/Headerfile/controlLoop.h:
 ../Core/Inc/structs.h:
+../Core/Inc/initialtask.h:
