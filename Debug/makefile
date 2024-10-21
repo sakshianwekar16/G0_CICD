@@ -10,16 +10,16 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Drivers/STM32G0xx_HAL_Driver/Src/subdir.mk
--include DMC/commutation/subdir.mk
--include DMC/Taskhandler/subdir.mk
--include DMC/StateMachine/subdir.mk
--include DMC/ProtectionHandler/subdir.mk
--include DMC/MeasurementHandler/subdir.mk
--include DMC/DrivingHandler/subdir.mk
--include DMC/Cruise_control/subdir.mk
--include DMC/ControlLoop/subdir.mk
--include DMC/Auxilaries/subdir.mk
--include DMC/subdir.mk
+-include DMC/DMC/commutation/subdir.mk
+-include DMC/DMC/Taskhandler/subdir.mk
+-include DMC/DMC/StateMachine/subdir.mk
+-include DMC/DMC/ProtectionHandler/subdir.mk
+-include DMC/DMC/MeasurementHandler/subdir.mk
+-include DMC/DMC/DrivingHandler/subdir.mk
+-include DMC/DMC/Cruise_control/subdir.mk
+-include DMC/DMC/ControlLoop/subdir.mk
+-include DMC/DMC/Auxilaries/subdir.mk
+-include DMC/DMC/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
@@ -70,8 +70,8 @@ all: main-build
 main-build: DMC_G0.elf secondary-outputs
 
 # Tool invocations
-DMC_G0.elf DMC_G0.map: $(OBJS) $(USER_OBJS) D:\DMC_G0\STM32G030C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "DMC_G0.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"D:\DMC_G0\STM32G030C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DMC_G0.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+DMC_G0.elf DMC_G0.map: $(OBJS) $(USER_OBJS) C:\Users\Sakshi\OneDrive\Desktop\project\G0_CICD\STM32G030C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "DMC_G0.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\Sakshi\OneDrive\Desktop\project\G0_CICD\STM32G030C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DMC_G0.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -1,5 +1,0 @@
-../DMC/ControlLoop/controlLoop.c:11:6:updateSpeedPIValues	3
-../DMC/ControlLoop/controlLoop.c:29:6:speedPI	3
-../DMC/ControlLoop/controlLoop.c:48:6:currentPI	4
-../DMC/ControlLoop/controlLoop.c:72:6:controlLoop_run	2
-../DMC/ControlLoop/controlLoop.c:83:6:controlLoop_reset	1

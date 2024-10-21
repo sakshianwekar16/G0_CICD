@@ -257,7 +257,7 @@ void TIM3_IRQHandler(void)
 		        uint8_t hall = ((HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
 		                        | (HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin) << 2)
 		                        | HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin));
-		        Measured.hallstate = hall ^ MotorRun.hallmodifier;
+		        MotorRun.hallstate = hall ^ MotorRun.hallmodifier;
 		        MotorRun.phaseIncAcc =0;
 				if (Measured.motorPeriod.firstCap == 1U){
 					Measured.motorPeriod.firstCap = 0U;
@@ -269,7 +269,7 @@ void TIM3_IRQHandler(void)
 		        handle_hall(hall);
 				calculateMotorPeriod(Measured.motorPeriod.capturedValue);
 				calculateMotorSpeed(Measured.motorPeriod.periodBeforeClamp);
-				getHallAngle(Measured.hallstate);
+				getHallAngle(MotorRun.hallstate);
 	} else {
 		/* Nothing to do */
 	}
@@ -283,15 +283,15 @@ void TIM3_IRQHandler(void)
 /**
   * @brief This function handles TIM14 global interrupt.
   */
+
+void update_PDCValues(PDC1Latch,PDC2Latch,PDC3Latch){
+	TIM1->CCR3 = PDC1Latch;
+	TIM1->CCR2 = PDC3Latch;
+	TIM1->CCR1 = PDC2Latch;
+}
 void TIM14_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM14_IRQn 0 */
-		TIM1->CCR3 = FixedValue.PDC1Latch;
-		TIM1->CCR2 = FixedValue.PDC2Latch;
-		TIM1->CCR1 = FixedValue.PDC3Latch;
-		get_PHASEA_PWM_Value();
-		get_PHASEB_PWM_Value();
-		get_PHASEC_PWM_Value();
 	initialconfiguration();
 	slow_loop();
 	phaseAdv_updateAngle();
@@ -299,7 +299,6 @@ void TIM14_IRQHandler(void)
 	filterMotorSpeed();
 	uint32_t brake = HAL_GPIO_ReadPin(BRAKE_GPIO_Port, BRAKE_Pin);
 	update_brakevalue(brake);
-	handleDrivingInputSource();
 	stateMachine_handle();
   /* USER CODE END TIM14_IRQn 0 */
   HAL_TIM_IRQHandler(&htim14);

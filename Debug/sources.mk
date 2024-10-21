@@ -24,15 +24,15 @@ C_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
-DMC/Auxilaries \
-DMC/ControlLoop \
-DMC/Cruise_control \
-DMC/DrivingHandler \
-DMC/MeasurementHandler \
-DMC/ProtectionHandler \
-DMC/StateMachine \
-DMC/Taskhandler \
-DMC/commutation \
-DMC \
+DMC/DMC/Auxilaries \
+DMC/DMC/ControlLoop \
+DMC/DMC/Cruise_control \
+DMC/DMC/DrivingHandler \
+DMC/DMC/MeasurementHandler \
+DMC/DMC/ProtectionHandler \
+DMC/DMC/StateMachine \
+DMC/DMC/Taskhandler \
+DMC/DMC/commutation \
+DMC/DMC \
 Drivers/STM32G0xx_HAL_Driver/Src \
 

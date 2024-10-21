@@ -1,4 +1,0 @@
-../DMC/StateMachine/statemachine.c:13:6:stateMachine_handle	25
-../DMC/StateMachine/statemachine.c:63:6:stateMachine_stepIntoIdle	1
-../DMC/StateMachine/statemachine.c:70:6:stateMachine_stepIntoRun	1
-../DMC/StateMachine/statemachine.c:81:6:stateMachine_stepIntoError	1
