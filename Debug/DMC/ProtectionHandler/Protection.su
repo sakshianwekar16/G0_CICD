@@ -3,4 +3,4 @@
 ../DMC/ProtectionHandler/Protection.c:25:10:check_overvoltage	8	static
 ../DMC/ProtectionHandler/Protection.c:30:10:check_undervoltage	8	static
 ../DMC/ProtectionHandler/Protection.c:34:10:check_overCurrent	8	static
-../DMC/ProtectionHandler/Protection.c:39:10:check_overTemperature	8	static
+../DMC/ProtectionHandler/Protection.c:39:10:check_overTemperature	0	static

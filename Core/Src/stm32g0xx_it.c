@@ -286,14 +286,15 @@ void TIM3_IRQHandler(void)
 void TIM14_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM14_IRQn 0 */
+	FixedValue.counter++;
+	slow_loop();
 		TIM1->CCR3 = FixedValue.PDC1Latch;
-		TIM1->CCR2 = FixedValue.PDC2Latch;
-		TIM1->CCR1 = FixedValue.PDC3Latch;
+		TIM1->CCR2 = FixedValue.PDC3Latch;
+		TIM1->CCR1 = FixedValue.PDC2Latch;
 		get_PHASEA_PWM_Value();
 		get_PHASEB_PWM_Value();
 		get_PHASEC_PWM_Value();
 	initialconfiguration();
-	slow_loop();
 	phaseAdv_updateAngle();
 	filterMotorPeriod();
 	filterMotorSpeed();
@@ -314,6 +315,7 @@ void TIM14_IRQHandler(void)
 void TIM17_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM17_IRQn 0 */
+
 	    updateSpeedPIValues();
 		SWS_calculateSpeed();
 		pedal_handle();
@@ -321,12 +323,12 @@ void TIM17_IRQHandler(void)
 		update_time(sec);
 		cruise_handle();
 		handleDrivingInputSource();
-		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13 };
-		transmit(tx_data);
-		display_handleTransmission();
-		HAL_UART_Transmit_IT(&huart1, tx_data, 14);
-		display_handleReception();
+//		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x00,
+//				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13 };
+//		transmit(tx_data);
+//		display_handleTransmission();
+//		HAL_UART_Transmit_IT(&huart1, tx_data, 14);
+//		display_handleReception();
   /* USER CODE END TIM17_IRQn 0 */
   HAL_TIM_IRQHandler(&htim17);
   /* USER CODE BEGIN TIM17_IRQn 1 */
@@ -396,8 +398,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
     if (hadc->Instance == ADC1) {
         // Process ADC values
     	uint32_t current = HostVar.rawADCValues[1];
-    	uint32_t voltage = HostVar.rawADCValues[0];
-    	uint32_t throttle = HostVar.rawADCValues[2];
+    	uint32_t voltage = HostVar.rawADCValues[2];
+    	uint32_t throttle = HostVar.rawADCValues[0];
     	uint32_t temperature = HostVar.rawADCValues[3];
 //        process_adc_values();
     	// Call the function to process ADC values and check protections
