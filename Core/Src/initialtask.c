@@ -15,8 +15,8 @@
 
 void InitalConfig(void) {
 
-	FixedValue.stateMachine_state = SMS_INITIAL;
-	MotorRun.runDirectionFlag = REVERSE;
+	ControlVals.stateMachine_state = SMS_INITIAL;
+	MotorRun.runDirectionFlag = FORWARD;
 	//set timer 3 In xor Mode And Enable Input Capture interrupt and Time Base interrupt
 	LL_TIM_IC_SetFilter(TIM3, LL_TIM_CHANNEL_CH1, (uint32_t) (12) << 20);
 	LL_TIM_SetPrescaler(TIM3, 146);
@@ -28,7 +28,7 @@ void InitalConfig(void) {
 	LL_TIM_SetCounter(TIM3, 0);
 	LL_TIM_CC_EnableChannel(TIM3, LL_TIM_CHANNEL_CH1);
 	LL_TIM_EnableCounter(TIM3);
-
+	initialconfiguration();
 	HAL_TIM_Base_Start_IT(&htim17);
 	//enable ADC Calibration
 	HAL_ADCEx_Calibration_Start(&hadc1);

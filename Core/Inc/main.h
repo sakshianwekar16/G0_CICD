@@ -95,10 +95,10 @@ void Error_Handler(void);
 #define MOTOR_SPD_Pin GPIO_PIN_3
 #define MOTOR_SPD_GPIO_Port GPIOB
 #define MOTOR_SPD_EXTI_IRQn EXTI2_3_IRQn
-#define HV_Pin GPIO_PIN_4
-#define HV_GPIO_Port GPIOB
-#define HU_Pin GPIO_PIN_5
+#define HU_Pin GPIO_PIN_4
 #define HU_GPIO_Port GPIOB
+#define HV_Pin GPIO_PIN_5
+#define HV_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

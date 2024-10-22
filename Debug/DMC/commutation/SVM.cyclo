@@ -1,0 +1,3 @@
+../DMC/commutation/SVM.c:47:5:getvector	6
+../DMC/commutation/SVM.c:106:6:updatePWM	6
+../DMC/commutation/SVM.c:73:6:SVMRun	7

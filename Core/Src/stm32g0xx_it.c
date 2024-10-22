@@ -254,10 +254,10 @@ void TIM3_IRQHandler(void)
 		LL_TIM_ClearFlag_CC1(TIM3);
 		MotorRun.hall_overflowedFlag = 0;
 		        // Read hall value here
-		        uint8_t hall = ((HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
-		                        | (HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin) << 2)
-		                        | HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin));
-		        MotorRun.hallstate = hall ^ MotorRun.hallmodifier;
+		        uint8_t hall = ((HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin) << 2)
+		                        | (HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
+		                        | HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin));
+		        MotorRun.hallstate = hall ^ FixedValue.hallmodifier;
 		        MotorRun.phaseIncAcc =0;
 				if (Measured.motorPeriod.firstCap == 1U){
 					Measured.motorPeriod.firstCap = 0U;
@@ -283,23 +283,23 @@ void TIM3_IRQHandler(void)
 /**
   * @brief This function handles TIM14 global interrupt.
   */
-
-void update_PDCValues(PDC1Latch,PDC2Latch,PDC3Latch){
-	TIM1->CCR3 = PDC1Latch;
-	TIM1->CCR2 = PDC3Latch;
-	TIM1->CCR1 = PDC2Latch;
-}
 void TIM14_IRQHandler(void)
 {
+	MotorRun.counter++;
   /* USER CODE BEGIN TIM14_IRQn 0 */
-	initialconfiguration();
-	slow_loop();
+		TIM1->CCR3 = MotorRun.PDC1Latch;
+		TIM1->CCR2 = MotorRun.PDC3Latch;
+		TIM1->CCR1 = MotorRun.PDC2Latch;
+//	initialconfiguration();
+	fast_loop();
 	phaseAdv_updateAngle();
 	filterMotorPeriod();
 	filterMotorSpeed();
 	uint32_t brake = HAL_GPIO_ReadPin(BRAKE_GPIO_Port, BRAKE_Pin);
 	update_brakevalue(brake);
+	handleDrivingInputSource();
 	stateMachine_handle();
+
   /* USER CODE END TIM14_IRQn 0 */
   HAL_TIM_IRQHandler(&htim14);
   /* USER CODE BEGIN TIM14_IRQn 1 */
@@ -314,18 +314,18 @@ void TIM17_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM17_IRQn 0 */
 	    updateSpeedPIValues();
+	    slow_loop();
 		SWS_calculateSpeed();
 		pedal_handle();
 		uint32_t sec = HAL_GetTick();
-		update_time(sec);
-		cruise_handle();
-		handleDrivingInputSource();
-		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x00,
-				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13 };
-		transmit(tx_data);
-		display_handleTransmission();
-		HAL_UART_Transmit_IT(&huart1, tx_data, 14);
-		display_handleReception();
+//		update_time(sec);
+//		cruise_handle();
+//		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x00,
+//				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13 };
+//		transmit(tx_data);
+//		display_handleTransmission();
+//		HAL_UART_Transmit_IT(&huart1, tx_data, 14);
+//		display_handleReception();
   /* USER CODE END TIM17_IRQn 0 */
   HAL_TIM_IRQHandler(&htim17);
   /* USER CODE BEGIN TIM17_IRQn 1 */
@@ -385,7 +385,7 @@ void handleHallOverflow(void){
 //	filterMotorSpeed();
 //	getHallPos();
 	handle_hall(Measured.hallPosition);
-	getHallAngle(Measured.hallstate);
+	getHallAngle(MotorRun.hallstate);
 //	Fixedvalue.phaseIncAcc = 0;
 	Measured.motorPeriod.firstCap = 1U;
 }
@@ -395,8 +395,8 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
     if (hadc->Instance == ADC1) {
         // Process ADC values
     	uint32_t current = HostVar.rawADCValues[1];
-    	uint32_t voltage = HostVar.rawADCValues[0];
-    	uint32_t throttle = HostVar.rawADCValues[2];
+    	uint32_t voltage = HostVar.rawADCValues[2];
+    	uint32_t throttle = HostVar.rawADCValues[0];
     	uint32_t temperature = HostVar.rawADCValues[3];
 //        process_adc_values();
     	// Call the function to process ADC values and check protections
