@@ -6,4 +6,4 @@
 ../DMC/Cruise_control/cruiseControl.c:49:6:cruise_toggle	12	static
 ../DMC/Cruise_control/cruiseControl.c:59:6:setAutoCruiseIfThrottleStable	12	static
 ../DMC/Cruise_control/cruiseControl.c:67:6:checkManualCruise	20	static
-../DMC/Cruise_control/cruiseControl.c:74:6:cruise_handle	8	static
+../DMC/Cruise_control/cruiseControl.c:74:6:cruise_handle	12	static

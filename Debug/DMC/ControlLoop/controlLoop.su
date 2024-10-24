@@ -1,5 +1,5 @@
 ../DMC/ControlLoop/controlLoop.c:13:6:updateSpeedPIValues	0	static
 ../DMC/ControlLoop/controlLoop.c:31:6:speedPI	8	static
-../DMC/ControlLoop/controlLoop.c:50:6:currentPI	12	static
-../DMC/ControlLoop/controlLoop.c:74:6:controlLoop_run	8	static
-../DMC/ControlLoop/controlLoop.c:85:6:controlLoop_reset	0	static
+../DMC/ControlLoop/controlLoop.c:51:6:currentPI	12	static
+../DMC/ControlLoop/controlLoop.c:75:6:controlLoop_run	8	static
+../DMC/ControlLoop/controlLoop.c:86:6:controlLoop_reset	0	static

@@ -1,3 +1,3 @@
 ../DMC/Auxilaries/pedalAssist.c:13:6:pedal_riseIntHandler	0	static
-../DMC/Auxilaries/pedalAssist.c:54:6:pedal_setLimits	0	static
 ../DMC/Auxilaries/pedalAssist.c:32:6:pedal_handle	24	static
+../DMC/Auxilaries/pedalAssist.c:54:6:pedal_setLimits	0	static
