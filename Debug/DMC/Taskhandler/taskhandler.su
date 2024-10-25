@@ -1,5 +1,5 @@
 ../DMC/Taskhandler/taskhandler.c:19:6:handle_hall	8	static
 ../DMC/Taskhandler/taskhandler.c:29:6:update_ADC	8	static
 ../DMC/Taskhandler/taskhandler.c:35:6:fast_loop	16	static
-../DMC/Taskhandler/taskhandler.c:46:6:update_brakevalue	0	static
-../DMC/Taskhandler/taskhandler.c:50:6:slow_loop	16	static
+../DMC/Taskhandler/taskhandler.c:47:6:update_brakevalue	0	static
+../DMC/Taskhandler/taskhandler.c:51:6:slow_loop	16	static

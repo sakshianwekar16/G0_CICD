@@ -247,6 +247,11 @@ void TIM3_IRQHandler(void)
 	} else {
 
 		LL_TIM_ClearFlag_UPDATE(TIM3);
+		uint8_t hall = ((HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin) << 2)
+						| (HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
+						| HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin));
+		Measured.hallPosition = hall;
+		MotorRun.hallstate = hall ^ FixedValue.hallmodifier;
 	  handleHallOverflow();
 	}
 
@@ -259,6 +264,7 @@ void TIM3_IRQHandler(void)
 		        uint8_t hall = ((HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin) << 2)
 		                        | (HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
 		                        | HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin));
+		        Measured.hallPosition = hall;
 		        MotorRun.hallstate = hall ^ FixedValue.hallmodifier;
 		        MotorRun.phaseIncAcc =0;
 				if (Measured.motorPeriod.firstCap == 1U){
@@ -268,7 +274,7 @@ void TIM3_IRQHandler(void)
 				Measured.motorPeriod.lastInputCapturedTime = HAL_GetTick();
 		        Measured.motorPeriod.inputCaptured = 1;
 		        Measured.motorPeriod.capturedValue =(uint16_t) LL_TIM_IC_GetCaptureCH1(TIM3);
-		        handle_hall(hall);
+		        handle_hall(Measured.hallPosition);
 				calculateMotorPeriod(Measured.motorPeriod.capturedValue);
 				calculateMotorSpeed(Measured.motorPeriod.periodBeforeClamp);
 				getHallAngle(MotorRun.hallstate);
@@ -322,16 +328,16 @@ void TIM17_IRQHandler(void)
 	    slow_loop();
 //	    phaseAdv_updateAngle();
 //	    HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_RESET);
-		SWS_calculateSpeed();
+		SWS_calculateSpeed(HAL_GetTick());
 		pedal_handle(HAL_GetTick());
 //		HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_RESET);
 //		uint32_t sec = HAL_GetTick();
 //		update_time(sec);
 //		cruise_handle();
-//		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x00,
-//				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13 };
+//		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x02,
+//				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13};
 //		transmit(tx_data);
-//		display_handleTransmission();
+//		display_handleTransmission(tx_data);
 //		HAL_UART_Transmit_IT(&huart1, tx_data, 14);
 //		display_handleReception();
   /* USER CODE END TIM17_IRQn 0 */
@@ -363,6 +369,12 @@ void motorenable() {
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
 	HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_3);
+	FixedValue.istimerON_A = 1;
+	FixedValue.istimerON_B = 1;
+	FixedValue.istimerON_C = 1; //high side timer
+	FixedValue.islowersideON_A = 1;
+	FixedValue.islowersideON_B = 1;
+	FixedValue.islowersideON_C = 1;
 }
 
 void motordisable() {
@@ -372,6 +384,12 @@ void motordisable() {
 	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
 	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_2);
 	HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_3);
+	FixedValue.istimerON_A = 0;
+	FixedValue.istimerON_B = 0;
+	FixedValue.istimerON_C = 0; //high side timer
+	FixedValue.islowersideON_A = 0;
+	FixedValue.islowersideON_B = 0;
+	FixedValue.islowersideON_C = 0;
 }
 
 
@@ -448,7 +466,7 @@ void display_parse() {
 	Display.in.parsed.pedalAssist = Communication.rawData[4];
 	Display.in.parsed.multiParam.value = Communication.rawData[5];
 	if (Display.in.parsed.multiParam.cruiseSignal == 1) {
-		cruise_toggle();
+//		cruise_toggle();
 	}
 }
 
