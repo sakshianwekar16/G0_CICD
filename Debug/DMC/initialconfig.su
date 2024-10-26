@@ -1,2 +1,2 @@
-../DMC/initialconfig.c:20:6:initialvalueassignment	20	static
-../DMC/initialconfig.c:12:6:initialconfiguration	8	static
+../DMC/initialconfig.c:21:6:initialvalueassignment	32	static
+../DMC/initialconfig.c:13:6:initialconfiguration	8	static

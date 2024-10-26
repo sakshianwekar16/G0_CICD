@@ -3,7 +3,7 @@
 ../DMC/MeasurementHandler/measurement.c:38:10:calculate_voltage	0	static
 ../DMC/MeasurementHandler/measurement.c:55:10:calculate_current	16	static
 ../DMC/MeasurementHandler/measurement.c:69:10:measure_temperature	8	static
-../DMC/MeasurementHandler/measurement.c:74:6:calculateMotorPeriod	0	static
+../DMC/MeasurementHandler/measurement.c:74:6:calculateMotorPeriod	8	static
 ../DMC/MeasurementHandler/measurement.c:95:6:resetMotorPeriod	0	static
 ../DMC/MeasurementHandler/measurement.c:99:6:filterMotorPeriod	0	static
 ../DMC/MeasurementHandler/measurement.c:104:6:calculateMotorSpeed	8	static

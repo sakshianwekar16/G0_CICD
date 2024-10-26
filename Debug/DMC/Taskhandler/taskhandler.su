@@ -1,5 +1,7 @@
 ../DMC/Taskhandler/taskhandler.c:19:6:handle_hall	8	static
-../DMC/Taskhandler/taskhandler.c:29:6:update_ADC	8	static
-../DMC/Taskhandler/taskhandler.c:35:6:fast_loop	16	static
-../DMC/Taskhandler/taskhandler.c:47:6:update_brakevalue	0	static
-../DMC/Taskhandler/taskhandler.c:51:6:slow_loop	16	static
+../DMC/Taskhandler/taskhandler.c:26:6:handleHallOverflow	24	static
+../DMC/Taskhandler/taskhandler.c:35:6:handleHallchange	16	static
+../DMC/Taskhandler/taskhandler.c:52:6:update_ADC	8	static
+../DMC/Taskhandler/taskhandler.c:58:6:fast_loop	16	static
+../DMC/Taskhandler/taskhandler.c:70:6:update_brakevalue	0	static
+../DMC/Taskhandler/taskhandler.c:74:6:slow_loop	16	static

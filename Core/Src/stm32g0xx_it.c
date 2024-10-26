@@ -250,34 +250,32 @@ void TIM3_IRQHandler(void)
 		uint8_t hall = ((HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin) << 2)
 						| (HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
 						| HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin));
-		Measured.hallPosition = hall;
-		MotorRun.hallstate = hall ^ FixedValue.hallmodifier;
+		MotorRun.hallPosition = hall;
 	  handleHallOverflow();
 	}
 
 
 	if (LL_TIM_IsActiveFlag_CC1(TIM3) != 0U) {
 		LL_TIM_ClearFlag_CC1(TIM3);
-		MotorRun.hall_overflowedFlag = 0;
-//		HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_SET);
 		        // Read hall value here
-		        uint8_t hall = ((HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin) << 2)
-		                        | (HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
-		                        | HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin));
-		        Measured.hallPosition = hall;
-		        MotorRun.hallstate = hall ^ FixedValue.hallmodifier;
-		        MotorRun.phaseIncAcc =0;
-				if (Measured.motorPeriod.firstCap == 1U){
-					Measured.motorPeriod.firstCap = 0U;
-					Measured.motorPeriod.capturedValue = MAX_HALL_PERIOD;
-				}
-				Measured.motorPeriod.lastInputCapturedTime = HAL_GetTick();
-		        Measured.motorPeriod.inputCaptured = 1;
-		        Measured.motorPeriod.capturedValue =(uint16_t) LL_TIM_IC_GetCaptureCH1(TIM3);
-		        handle_hall(Measured.hallPosition);
-				calculateMotorPeriod(Measured.motorPeriod.capturedValue);
-				calculateMotorSpeed(Measured.motorPeriod.periodBeforeClamp);
-				getHallAngle(MotorRun.hallstate);
+//		        uint8_t hall = ((HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin) << 2)
+//		                        | (HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
+//		                        | HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin));
+//		        MotorRun.hallPosition = hall;
+		        handle_hall(MotorRun.hallPosition);
+		        handleHallchange(HAL_GetTick(),LL_TIM_IC_GetCaptureCH1(TIM3));
+//		        MotorRun.phaseIncAcc =0;
+//				if (Measured.motorPeriod.firstCap == 1U){
+//					Measured.motorPeriod.firstCap = 0U;
+//					Measured.motorPeriod.capturedValue = FixedValue.maxHallPeriod;
+//				}
+//				Measured.motorPeriod.lastInputCapturedTime = HAL_GetTick();
+//		        Measured.motorPeriod.inputCaptured = 1;
+//
+//		        Measured.motorPeriod.capturedValue =(uint16_t) LL_TIM_IC_GetCaptureCH1(TIM3);
+//				calculateMotorPeriod(Measured.motorPeriod.capturedValue);
+//				calculateMotorSpeed(Measured.motorPeriod.periodBeforeClamp);
+//				getHallAngle(MotorRun.hallstate);
 //				HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_RESET);
 	} else {
 		/* Nothing to do */
@@ -402,19 +400,6 @@ void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {
     }
 }
 
-void handleHallOverflow(void){
-	Measured.motorSpeed.speedWithoutFilter = 0;
-//		measured.motorSpeed.speed = 0;
-	Measured.motorPeriod.periodBeforeFilter = MAX_HALL_PERIOD;
-	Measured.motorPeriod.period = MAX_HALL_PERIOD;
-//		calculateMotorSpeed(measured.motorPeriod.period);
-//	filterMotorSpeed();
-//	getHallPos();
-	handle_hall(Measured.hallPosition);
-	getHallAngle(MotorRun.hallstate);
-//	Fixedvalue.phaseIncAcc = 0;
-	Measured.motorPeriod.firstCap = 1U;
-}
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 
