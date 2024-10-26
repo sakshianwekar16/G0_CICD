@@ -250,20 +250,19 @@ void TIM3_IRQHandler(void)
 		uint8_t hall = ((HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin) << 2)
 						| (HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
 						| HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin));
-		MotorRun.hallPosition = hall;
-	  handleHallOverflow();
+		get_hall_Pos(hall);
+	    handle_HallOverflow();
 	}
 
 
 	if (LL_TIM_IsActiveFlag_CC1(TIM3) != 0U) {
 		LL_TIM_ClearFlag_CC1(TIM3);
 		        // Read hall value here
-//		        uint8_t hall = ((HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin) << 2)
-//		                        | (HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
-//		                        | HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin));
-//		        MotorRun.hallPosition = hall;
-		        handle_hall(MotorRun.hallPosition);
-		        handleHallchange(HAL_GetTick(),LL_TIM_IC_GetCaptureCH1(TIM3));
+		        uint8_t hall = ((HAL_GPIO_ReadPin(HW_GPIO_Port, HW_Pin) << 2)
+		                        | (HAL_GPIO_ReadPin(HV_GPIO_Port, HV_Pin) << 1)
+		                        | HAL_GPIO_ReadPin(HU_GPIO_Port, HU_Pin));
+		        get_hall_Pos(hall);
+		        handle_Hallchange(HAL_GetTick(),LL_TIM_IC_GetCaptureCH1(TIM3));
 //		        MotorRun.phaseIncAcc =0;
 //				if (Measured.motorPeriod.firstCap == 1U){
 //					Measured.motorPeriod.firstCap = 0U;
@@ -297,16 +296,16 @@ void TIM14_IRQHandler(void)
 		TIM1->CCR3 = MotorRun.PDC1Latch;
 		TIM1->CCR2 = MotorRun.PDC3Latch;
 		TIM1->CCR1 = MotorRun.PDC2Latch;
-//	initialconfiguration();
+
 	fast_loop();
 //	updateSpeedPIValues();
 //	phaseAdv_updateAngle();
-	filterMotorPeriod();
-	filterMotorSpeed();
+//	filterMotorPeriod();
+//	filterMotorSpeed();
 	uint32_t brake = HAL_GPIO_ReadPin(BRAKE_GPIO_Port, BRAKE_Pin);
 	update_brakevalue(brake);
-	handleDrivingInputSource();
-	stateMachine_handle();
+//	handleDrivingInputSource();
+//	stateMachine_handle();
 //	HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_RESET);
   /* USER CODE END TIM14_IRQn 0 */
   HAL_TIM_IRQHandler(&htim14);
@@ -326,8 +325,10 @@ void TIM17_IRQHandler(void)
 	    slow_loop();
 //	    phaseAdv_updateAngle();
 //	    HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_RESET);
-		SWS_calculateSpeed(HAL_GetTick());
-		pedal_handle(HAL_GetTick());
+	    uint32_t time = HAL_GetTick();
+	    update_present_time(time);
+//		SWS_calculateSpeed(HAL_GetTick());
+//		pedal_handle(HAL_GetTick());
 //		HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_RESET);
 //		uint32_t sec = HAL_GetTick();
 //		update_time(sec);

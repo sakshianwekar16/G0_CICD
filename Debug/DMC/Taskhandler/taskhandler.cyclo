@@ -1,7 +1,8 @@
-../DMC/Taskhandler/taskhandler.c:19:6:handle_hall	1
-../DMC/Taskhandler/taskhandler.c:26:6:handleHallOverflow	1
-../DMC/Taskhandler/taskhandler.c:35:6:handleHallchange	2
-../DMC/Taskhandler/taskhandler.c:52:6:update_ADC	1
-../DMC/Taskhandler/taskhandler.c:58:6:fast_loop	1
-../DMC/Taskhandler/taskhandler.c:70:6:update_brakevalue	1
-../DMC/Taskhandler/taskhandler.c:74:6:slow_loop	1
+../DMC/Taskhandler/taskhandler.c:19:6:get_hall_Pos	1
+../DMC/Taskhandler/taskhandler.c:27:6:handle_HallOverflow	1
+../DMC/Taskhandler/taskhandler.c:36:6:handle_Hallchange	2
+../DMC/Taskhandler/taskhandler.c:54:6:update_ADC	1
+../DMC/Taskhandler/taskhandler.c:60:6:fast_loop	1
+../DMC/Taskhandler/taskhandler.c:77:6:update_brakevalue	1
+../DMC/Taskhandler/taskhandler.c:81:6:update_present_time	1
+../DMC/Taskhandler/taskhandler.c:86:6:slow_loop	1
