@@ -293,11 +293,11 @@ void TIM14_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM14_IRQn 0 */
 //	HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_SET);
-		TIM1->CCR3 = MotorRun.PDC1Latch;
-		TIM1->CCR2 = MotorRun.PDC3Latch;
-		TIM1->CCR1 = MotorRun.PDC2Latch;
-
 	fast_loop();
+	TIM1->CCR3 = get_phaseA_value();
+	TIM1->CCR2 = get_phaseC_value();
+	TIM1->CCR1 = get_phaseB_value();
+
 //	updateSpeedPIValues();
 //	phaseAdv_updateAngle();
 //	filterMotorPeriod();

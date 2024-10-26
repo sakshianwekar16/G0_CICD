@@ -1,3 +1,6 @@
 ../DMC/commutation/SVM.c:47:5:getvector	6
 ../DMC/commutation/SVM.c:106:6:updatePWM	6
 ../DMC/commutation/SVM.c:73:6:SVMRun	7
+../DMC/commutation/SVM.c:144:10:get_phaseA_value	1
+../DMC/commutation/SVM.c:148:10:get_phaseB_value	1
+../DMC/commutation/SVM.c:152:10:get_phaseC_value	1
