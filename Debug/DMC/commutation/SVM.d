@@ -45,8 +45,9 @@ DMC/commutation/SVM.o: ../DMC/commutation/SVM.c ../Core/Inc/tim.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_gpio.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_exti.h \
- D:/DMC_G0/DMC/Headerfile/SVM.h D:/DMC_G0/DMC/Headerfile/sharedData.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/SVM.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h
 ../Core/Inc/tim.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
@@ -95,6 +96,6 @@ DMC/commutation/SVM.o: ../DMC/commutation/SVM.c ../Core/Inc/tim.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_gpio.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_exti.h:
-D:/DMC_G0/DMC/Headerfile/SVM.h:
-D:/DMC_G0/DMC/Headerfile/sharedData.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/SVM.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h:

@@ -1,9 +1,9 @@
 DMC/ControlLoop/controlLoop.o: ../DMC/ControlLoop/controlLoop.c \
- D:/DMC_G0/DMC/Headerfile/sharedData.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/controlLoop.h
-D:/DMC_G0/DMC/Headerfile/sharedData.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/controlLoop.h:
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/controlLoop.h
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/controlLoop.h:

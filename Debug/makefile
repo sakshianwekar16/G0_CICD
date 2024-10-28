@@ -70,8 +70,8 @@ all: main-build
 main-build: DMC_G0.elf secondary-outputs
 
 # Tool invocations
-DMC_G0.elf DMC_G0.map: $(OBJS) $(USER_OBJS) D:\DMC_G0\STM32G030C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "DMC_G0.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"D:\DMC_G0\STM32G030C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DMC_G0.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+DMC_G0.elf DMC_G0.map: $(OBJS) $(USER_OBJS) D:\Projects\CI_CD\G0_CICD\STM32G030C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "DMC_G0.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"D:\Projects\CI_CD\G0_CICD\STM32G030C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DMC_G0.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

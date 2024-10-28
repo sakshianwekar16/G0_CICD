@@ -1,8 +1,8 @@
 DMC/Auxilaries/Display.o: ../DMC/Auxilaries/Display.c \
- D:/DMC_G0/DMC/Headerfile/sharedData.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/define.h ../Core/Inc/usart.h ../Core/Inc/main.h \
- ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/define.h ../Core/Inc/usart.h \
+ ../Core/Inc/main.h ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Core/Inc/stm32g0xx_hal_conf.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h \
@@ -48,9 +48,9 @@ DMC/Auxilaries/Display.o: ../DMC/Auxilaries/Display.c \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_gpio.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_exti.h
-D:/DMC_G0/DMC/Headerfile/sharedData.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/define.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/define.h:
 ../Core/Inc/usart.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:

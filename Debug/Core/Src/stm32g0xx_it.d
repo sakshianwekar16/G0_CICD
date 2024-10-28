@@ -45,18 +45,23 @@ Core/Src/stm32g0xx_it.o: ../Core/Src/stm32g0xx_it.c ../Core/Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_gpio.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_exti.h \
- ../Core/Inc/stm32g0xx_it.h D:/DMC_G0/DMC/Headerfile/taskhandler.h \
- D:/DMC_G0/DMC/Headerfile/statemachine.h D:/DMC_G0/DMC/Headerfile/SVM.h \
- D:/DMC_G0/DMC/Headerfile/sharedData.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/motor.h D:/DMC_G0/DMC/Headerfile/Display.h \
- D:/DMC_G0/DMC/Headerfile/PedalAssist.h \
- D:/DMC_G0/DMC/Headerfile/cruisecontrol.h \
- D:/DMC_G0/DMC/Headerfile/brake.h D:/DMC_G0/DMC/Headerfile/define.h \
- D:/DMC_G0/DMC/Headerfile/SWS.h D:/DMC_G0/DMC/Headerfile/measurement.h \
- D:/DMC_G0/DMC/Headerfile/controlLoop.h ../Core/Inc/structs.h \
- ../Core/Inc/initialtask.h
+ ../Core/Inc/stm32g0xx_it.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/taskhandler.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/statemachine.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/SVM.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/motor.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/Display.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/PedalAssist.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/cruisecontrol.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/brake.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/define.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/SWS.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/measurement.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/controlLoop.h \
+ ../Core/Inc/structs.h ../Core/Inc/initialtask.h
 ../Core/Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
 ../Core/Inc/stm32g0xx_hal_conf.h:
@@ -105,20 +110,20 @@ Core/Src/stm32g0xx_it.o: ../Core/Src/stm32g0xx_it.c ../Core/Inc/main.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_exti.h:
 ../Core/Inc/stm32g0xx_it.h:
-D:/DMC_G0/DMC/Headerfile/taskhandler.h:
-D:/DMC_G0/DMC/Headerfile/statemachine.h:
-D:/DMC_G0/DMC/Headerfile/SVM.h:
-D:/DMC_G0/DMC/Headerfile/sharedData.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/motor.h:
-D:/DMC_G0/DMC/Headerfile/Display.h:
-D:/DMC_G0/DMC/Headerfile/PedalAssist.h:
-D:/DMC_G0/DMC/Headerfile/cruisecontrol.h:
-D:/DMC_G0/DMC/Headerfile/brake.h:
-D:/DMC_G0/DMC/Headerfile/define.h:
-D:/DMC_G0/DMC/Headerfile/SWS.h:
-D:/DMC_G0/DMC/Headerfile/measurement.h:
-D:/DMC_G0/DMC/Headerfile/controlLoop.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/taskhandler.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/statemachine.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/SVM.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/motor.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/Display.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/PedalAssist.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/cruisecontrol.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/brake.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/define.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/SWS.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/measurement.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/controlLoop.h:
 ../Core/Inc/structs.h:
 ../Core/Inc/initialtask.h:

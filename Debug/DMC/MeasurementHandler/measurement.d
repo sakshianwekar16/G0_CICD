@@ -1,13 +1,13 @@
 DMC/MeasurementHandler/measurement.o: \
  ../DMC/MeasurementHandler/measurement.c \
- D:/DMC_G0/DMC/Headerfile/measurement.h \
- D:/DMC_G0/DMC/Headerfile/VoltageCalculation.h \
- D:/DMC_G0/DMC/Headerfile/CurrentCalculation.h \
- D:/DMC_G0/DMC/Headerfile/sharedData.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/define.h ../Core/Inc/gpio.h ../Core/Inc/main.h \
- ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/measurement.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/VoltageCalculation.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/CurrentCalculation.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h \
+ D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/define.h ../Core/Inc/gpio.h \
+ ../Core/Inc/main.h ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Core/Inc/stm32g0xx_hal_conf.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h \
@@ -53,13 +53,13 @@ DMC/MeasurementHandler/measurement.o: \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_gpio.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_exti.h
-D:/DMC_G0/DMC/Headerfile/measurement.h:
-D:/DMC_G0/DMC/Headerfile/VoltageCalculation.h:
-D:/DMC_G0/DMC/Headerfile/CurrentCalculation.h:
-D:/DMC_G0/DMC/Headerfile/sharedData.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/define.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/measurement.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/VoltageCalculation.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/CurrentCalculation.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/sharedData.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/initialconfig.h:
+D:/Projects/CI_CD/G0_CICD/DMC/Headerfile/define.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:

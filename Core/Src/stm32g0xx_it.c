@@ -71,7 +71,7 @@ COMMUNICATION_VAL_t Communication;
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+uint32_t slowLoopCounter;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -333,11 +333,15 @@ void TIM17_IRQHandler(void)
 //		uint32_t sec = HAL_GetTick();
 //		update_time(sec);
 //		cruise_handle();
-//		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x02,
-//				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13};
-//		transmit(tx_data);
-//		display_handleTransmission(tx_data);
-//		HAL_UART_Transmit_IT(&huart1, tx_data, 14);
+	    slowLoopCounter++;
+	    if (slowLoopCounter % 15 == 0){
+	    	slowLoopCounter = 0;
+			static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x02,
+					0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13};
+			transmit(&tx_data);
+	//		display_handleTransmission(tx_data);
+			HAL_UART_Transmit_IT(&huart1, tx_data, 14);
+	    }
 //		display_handleReception();
   /* USER CODE END TIM17_IRQn 0 */
   HAL_TIM_IRQHandler(&htim17);
