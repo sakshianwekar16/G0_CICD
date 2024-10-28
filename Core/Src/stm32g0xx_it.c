@@ -71,6 +71,7 @@ COMMUNICATION_VAL_t Communication;
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint32_t SlowLoopcounter;
 
 /* USER CODE END 0 */
 
@@ -327,17 +328,25 @@ void TIM17_IRQHandler(void)
 //	    HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_RESET);
 	    uint32_t time = HAL_GetTick();
 	    update_present_time(time);
+
+	    uint32_t presentTime = HAL_GetTick();
+	    update_time(presentTime);
 //		SWS_calculateSpeed(HAL_GetTick());
 //		pedal_handle(HAL_GetTick());
 //		HAL_GPIO_WritePin(Buzzer_GPIO_Port, Buzzer_Pin, GPIO_PIN_RESET);
 //		uint32_t sec = HAL_GetTick();
 //		update_time(sec);
 //		cruise_handle();
-//		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x02,
-//				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13};
-//		transmit(tx_data);
+	    SlowLoopcounter++;
+	    if(SlowLoopcounter %15 == 0){
+	    	SlowLoopcounter = 0;
+
+		static uint8_t tx_data[14] = { 0x02, 0x0E, 0x01, 0x00, 0x00, 0x00, 0x02,
+				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 13};
+		transmit(&tx_data);
 //		display_handleTransmission(tx_data);
-//		HAL_UART_Transmit_IT(&huart1, tx_data, 14);
+		HAL_UART_Transmit_IT(&huart1, tx_data, 14);
+	    }
 //		display_handleReception();
   /* USER CODE END TIM17_IRQn 0 */
   HAL_TIM_IRQHandler(&htim17);
@@ -452,7 +461,7 @@ void display_parse() {
 	Display.in.parsed.pedalAssist = Communication.rawData[4];
 	Display.in.parsed.multiParam.value = Communication.rawData[5];
 	if (Display.in.parsed.multiParam.cruiseSignal == 1) {
-//		cruise_toggle();
+		cruise_toggle();
 	}
 }
 

@@ -3,7 +3,7 @@
 ../DMC/Cruise_control/cruiseControl.c:21:6:checkThrottlePosition	3
 ../DMC/Cruise_control/cruiseControl.c:35:6:cruise_start	2
 ../DMC/Cruise_control/cruiseControl.c:44:6:cruise_stop	1
-../DMC/Cruise_control/cruiseControl.c:49:6:cruise_toggle	3
-../DMC/Cruise_control/cruiseControl.c:59:6:setAutoCruiseIfThrottleStable	4
-../DMC/Cruise_control/cruiseControl.c:67:6:checkManualCruise	4
-../DMC/Cruise_control/cruiseControl.c:74:6:cruise_handle	6
+../DMC/Cruise_control/cruiseControl.c:50:6:cruise_toggle	3
+../DMC/Cruise_control/cruiseControl.c:60:6:setAutoCruiseIfThrottleStable	4
+../DMC/Cruise_control/cruiseControl.c:69:6:checkManualCruise	4
+../DMC/Cruise_control/cruiseControl.c:76:6:cruise_handle	6
