@@ -4,8 +4,8 @@
  *  Created on: Oct 18, 2024
  *      Author: pc
  */
-#include"sharedData.h"
-#include"initialconfig.h"
+#include <initialconfig.h>
+#include <sharedData.h>
 #include"structs.h"
 #include"dma.h"
 #include"adc.h"
@@ -35,7 +35,13 @@ void InitalConfig(void) {
 	HAL_ADCEx_Calibration_Start(&hadc1);
 	HAL_ADC_Start_DMA(&hadc1, HostVar.rawADCValues, 4);
 
+	// Add DMC overrides here
+	FixedValue.voltage_calibrationFactor = 1510;// for B4 hardware
+	FixedValue.controlPI.speedPI_ki_highRPM = 10;
+	FixedValue.controlPI.speedPI_ki_lowRPM = 10;
+	// till here
 	HAL_TIM_Base_Start_IT(&htim14);
+
 	//Start Display/
 	HAL_UART_Receive_IT(&huart1, Communication.rxBuf, DISPLAY_RXBUF_SIZE);
 

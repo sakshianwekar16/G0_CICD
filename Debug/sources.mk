@@ -25,14 +25,14 @@ SUBDIRS := \
 Core/Src \
 Core/Startup \
 DMC/Auxilaries \
+DMC/Commutation \
 DMC/ControlLoop \
-DMC/Cruise_control \
+DMC/CruiseControl \
 DMC/DrivingHandler \
 DMC/MeasurementHandler \
 DMC/ProtectionHandler \
 DMC/StateMachine \
 DMC/Taskhandler \
-DMC/commutation \
 DMC \
 Drivers/STM32G0xx_HAL_Driver/Src \
 

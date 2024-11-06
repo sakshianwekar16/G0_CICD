@@ -1,2 +1,2 @@
-../DMC/commutation/motor.c:77:6:phaseAdv_updateAngle	3
-../DMC/commutation/motor.c:86:6:motor_sineCommutation	6
+../DMC/Commutation/motor.c:77:6:phaseAdv_updateAngle	3
+../DMC/Commutation/motor.c:86:6:motor_sineCommutation	6

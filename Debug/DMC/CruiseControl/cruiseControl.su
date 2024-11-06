@@ -1,0 +1,9 @@
+../DMC/CruiseControl/cruiseControl.c:12:6:update_time	0	static
+../DMC/CruiseControl/cruiseControl.c:16:6:setBaseThrottleValue	0	static
+../DMC/CruiseControl/cruiseControl.c:21:6:checkThrottlePosition	8	static
+../DMC/CruiseControl/cruiseControl.c:35:6:cruise_start	8	static
+../DMC/CruiseControl/cruiseControl.c:44:6:cruise_stop	0	static
+../DMC/CruiseControl/cruiseControl.c:50:6:cruise_toggle	12	static
+../DMC/CruiseControl/cruiseControl.c:60:6:setAutoCruiseIfThrottleStable	12	static
+../DMC/CruiseControl/cruiseControl.c:69:6:checkManualCruise	20	static
+../DMC/CruiseControl/cruiseControl.c:76:6:cruise_handle	12	static

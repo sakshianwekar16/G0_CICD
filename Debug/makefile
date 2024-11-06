@@ -10,14 +10,14 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include Drivers/STM32G0xx_HAL_Driver/Src/subdir.mk
--include DMC/commutation/subdir.mk
 -include DMC/Taskhandler/subdir.mk
 -include DMC/StateMachine/subdir.mk
 -include DMC/ProtectionHandler/subdir.mk
 -include DMC/MeasurementHandler/subdir.mk
 -include DMC/DrivingHandler/subdir.mk
--include DMC/Cruise_control/subdir.mk
+-include DMC/CruiseControl/subdir.mk
 -include DMC/ControlLoop/subdir.mk
+-include DMC/Commutation/subdir.mk
 -include DMC/Auxilaries/subdir.mk
 -include DMC/subdir.mk
 -include Core/Startup/subdir.mk

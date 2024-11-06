@@ -1,18 +1,16 @@
-DMC/commutation/motor.o: ../DMC/commutation/motor.c \
- D:/DMC_G0/DMC/Headerfile/brake.h D:/DMC_G0/DMC/Headerfile/measurement.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/sharedData.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/taskhandler.h D:/DMC_G0/DMC/Headerfile/motor.h \
- D:/DMC_G0/DMC/Headerfile/SVM.h D:/DMC_G0/DMC/Headerfile/define.h \
- D:/DMC_G0/DMC/Headerfile/controlLoop.h
-D:/DMC_G0/DMC/Headerfile/brake.h:
-D:/DMC_G0/DMC/Headerfile/measurement.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/sharedData.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/taskhandler.h:
-D:/DMC_G0/DMC/Headerfile/motor.h:
-D:/DMC_G0/DMC/Headerfile/SVM.h:
-D:/DMC_G0/DMC/Headerfile/define.h:
-D:/DMC_G0/DMC/Headerfile/controlLoop.h:
+DMC/Commutation/motor.o: ../DMC/Commutation/motor.c \
+ D:/DMC_G0/DMC/HeaderFile/controlLoop.h D:/DMC_G0/DMC/HeaderFile/define.h \
+ D:/DMC_G0/DMC/HeaderFile/drivinghandler.h \
+ D:/DMC_G0/DMC/HeaderFile/initialconfig.h \
+ D:/DMC_G0/DMC/HeaderFile/measurement.h D:/DMC_G0/DMC/HeaderFile/motor.h \
+ D:/DMC_G0/DMC/HeaderFile/sharedData.h D:/DMC_G0/DMC/HeaderFile/SVM.h \
+ D:/DMC_G0/DMC/HeaderFile/taskhandler.h
+D:/DMC_G0/DMC/HeaderFile/controlLoop.h:
+D:/DMC_G0/DMC/HeaderFile/define.h:
+D:/DMC_G0/DMC/HeaderFile/drivinghandler.h:
+D:/DMC_G0/DMC/HeaderFile/initialconfig.h:
+D:/DMC_G0/DMC/HeaderFile/measurement.h:
+D:/DMC_G0/DMC/HeaderFile/motor.h:
+D:/DMC_G0/DMC/HeaderFile/sharedData.h:
+D:/DMC_G0/DMC/HeaderFile/SVM.h:
+D:/DMC_G0/DMC/HeaderFile/taskhandler.h:

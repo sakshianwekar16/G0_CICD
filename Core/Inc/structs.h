@@ -4,8 +4,8 @@
  *  Created on: Oct 18, 2024
  *      Author: pc
  */
+#include <define.h>
 #include "stdint.h"
-#include "define.h"
 #ifndef INC_STRUCTS_H_
 #define INC_STRUCTS_H_
 

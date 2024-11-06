@@ -18,24 +18,24 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
+#include <controlLoop.h>
+#include <cruisecontrol.h>
+#include <define.h>
+#include <drivinghandler.h>
+#include <Display.h>
+#include <initialconfig.h>
+#include <measurement.h>
+#include <motor.h>
+#include <pedalAssist.h>
+#include <sharedData.h>
+#include <statemachine.h>
+#include <SVM.h>
+#include <SWS.h>
+#include <taskhandler.h>
 #include "main.h"
 #include "stm32g0xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "taskhandler.h"
-#include "statemachine.h"
-#include "SVM.h"
-#include "sharedData.h"
-#include"initialconfig.h"
-#include "motor.h"
-#include "Display.h"
-#include "PedalAssist.h"
-#include"cruisecontrol.h"
-#include "brake.h"
-#include"define.h"
-#include "SWS.h"
-#include"measurement.h"
-#include"controlLoop.h"
 #include"main.h"
 #include"structs.h"
 #include"string.h"

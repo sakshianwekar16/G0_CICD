@@ -1,8 +1,7 @@
 Core/Src/initialtask.o: ../Core/Src/initialtask.c \
- D:/DMC_G0/DMC/Headerfile/sharedData.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h \
- D:/DMC_G0/DMC/Headerfile/initialconfig.h ../Core/Inc/structs.h \
- D:/DMC_G0/DMC/Headerfile/define.h ../Core/Inc/dma.h ../Core/Inc/main.h \
+ D:/DMC_G0/DMC/HeaderFile/initialconfig.h \
+ D:/DMC_G0/DMC/HeaderFile/sharedData.h ../Core/Inc/structs.h \
+ D:/DMC_G0/DMC/HeaderFile/define.h ../Core/Inc/dma.h ../Core/Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Core/Inc/stm32g0xx_hal_conf.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
@@ -51,11 +50,10 @@ Core/Src/initialtask.o: ../Core/Src/initialtask.c \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_exti.h \
  ../Core/Inc/adc.h ../Core/Inc/usart.h ../Core/Inc/tim.h \
  ../Core/Inc/main.h
-D:/DMC_G0/DMC/Headerfile/sharedData.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
-D:/DMC_G0/DMC/Headerfile/initialconfig.h:
+D:/DMC_G0/DMC/HeaderFile/initialconfig.h:
+D:/DMC_G0/DMC/HeaderFile/sharedData.h:
 ../Core/Inc/structs.h:
-D:/DMC_G0/DMC/Headerfile/define.h:
+D:/DMC_G0/DMC/HeaderFile/define.h:
 ../Core/Inc/dma.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
